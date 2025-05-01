@@ -55,12 +55,15 @@ void main(void) {
     LATB = 0x00;
     LATC = 0x00;
 
+    unsigned char ledState = 0;
+
     while (1) {
         if (PORTBbits.RB4 == 0) {
-            LATA = 0x10;
+            ledState ^= 1;
             __delay_ms(50);
-        } else if (PORTBbits.RB4 == 1) {
-            LATA = 0x00;
+        } 
+        if (ledState == 1) {
+            LATA ^= 0x10;
             __delay_ms(50);
         }
     }
